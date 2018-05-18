@@ -1,13 +1,39 @@
 $red: red;
+$black: (
+  "lighten-5": #D0D6E2,
+  "lighten-4": #B1BACE,
+  "lighten-3": #929FBA,
+  "lighten-2": #7283A7,
+  "lighten-1": #59698D,
+  "base": #45526E,
+  "darken-1": #3B465E,
+  "darken-2": #2E3951,
+  "darken-3": #1C2A48,
+  "darken-4": #1C2331,
+);
+
+$blue1: (
+  light: #ccc,
+  dark: #bbb,
+);
+
+$merge1 : map-keys($black);
+
 body {
-  // background-color: $red;
+ //  background-color: $red;
+  color: hsla(120deg, 100%, 50%,0.2);
   h2 {
     // this is global variable
     $blue: blue !global;
   }
   h1 {
     // Interactive Shell (mix multiple color)
-    color: $blue + $blue;
+//    color: $blue + $blue;
+
+//    color: map-get($black, "darken-4");
+//    color:  map-keys($+black);
+//    color:  map-values($black);
+    color:  map-has-key($black,'darken-4');
   }
 }
 
@@ -68,7 +94,7 @@ $value: red + blue + gray;
 
 // Called mixin
 body {
-  @include color($value...);
+  //@include color($value...);
 }
 
 // Dynamic add property
@@ -87,7 +113,34 @@ $color: white;
 }
 
 // Variables along with a plain CSS /, you can use #{} to insert them
+p {
   $font-size: 12px;
   $line-height: 30px;
   font: #{$font-size}/#{$line-height};
 }
+
+
+$grid-width: 40px;
+$gutter-width: 10px;
+
+@function grid-width($n) {
+  @return $n * $grid-width + ($n - 1) * $gutter-width;
+}
+
+#sidebar {
+  width: grid-width(5);
+}
+
+//map-get($map, $key) : Returns the value in a map associated with a given key.
+//
+//map-merge($map1, $map2) : Merges two maps together into a new map.
+//
+//map-remove($map, $keys…) : Returns a new map with keys removed.
+//
+//map-keys($map) : Returns a list of all keys in a map.
+//
+//map-values($map) : Returns a list of all values in a map.
+//
+//map-has-key($map, $key) : Returns whether a map has a value associated with a given key.
+//
+//keywords($args) : Returns the keywords passed to a function that takes variable arguments.
